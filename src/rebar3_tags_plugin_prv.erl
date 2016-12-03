@@ -1,4 +1,5 @@
 -module(rebar3_tags_plugin_prv).
+-behaviour(provider).
 
 -export([init/1, do/1, format_error/1]).
 
