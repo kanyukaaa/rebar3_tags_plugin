@@ -1,0 +1,14 @@
+{application, rebar3_tags_plugin,
+ [{description, "Rebar3 plugin to generate a tags file"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, []},
+  {links, []}]}.
