@@ -8,7 +8,6 @@
 
 -spec init(rebar_state:t()) -> {ok, rebar_state:t()}.
 init(State) ->
-  io:format("init ~tp~n", [State]),
   Provider = providers:create([{name, ?PROVIDER},            % The 'user friendly' name of the task
                                {module, ?MODULE},            % The module implementation of the task
                                {bare, true},                 % The task can be run by the user, always true
@@ -22,7 +21,13 @@ init(State) ->
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
-  io:format("do ~tp~n", [State]),
+  Apps = case rebar_state:current_app(State) of
+           undefined ->
+             rebar_state:project_apps(State);
+           App ->
+             [App]
+         end,
+  tags:subdirs([filename:join(rebar_app_info:dir(App), "src") || App <- Apps]),
   {ok, State}.
 
 -spec format_error(any()) ->  iolist().
